@@ -3,6 +3,7 @@ package filip.kasprzycki.luxmed.api.boundary;
 import filip.kasprzycki.luxmed.api.control.CompanyService;
 import filip.kasprzycki.luxmed.api.entity.CompanyReq;
 import filip.kasprzycki.luxmed.api.entity.CompanyResp;
+import filip.kasprzycki.luxmed.api.entity.CompanyUpdateReq;
 import filip.kasprzycki.luxmed.db.entity.Company;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,19 @@ public class CompanyController {
     @PostMapping
     public CompanyResp createCompany(@RequestBody CompanyReq company) {
         return companyService.createCompany(company);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
+        companyService.deleteCompany(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody CompanyUpdateReq company) {
+        return companyService.updateCompany(id, company)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+
     }
 }

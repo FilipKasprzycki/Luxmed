@@ -2,6 +2,7 @@ package filip.kasprzycki.luxmed.api.control;
 
 import filip.kasprzycki.luxmed.api.entity.CompanyReq;
 import filip.kasprzycki.luxmed.api.entity.CompanyResp;
+import filip.kasprzycki.luxmed.api.entity.CompanyUpdateReq;
 import filip.kasprzycki.luxmed.db.entity.Company;
 import filip.kasprzycki.luxmed.db.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ public class CompanyService {
     private final CompanyMapper companyMapper;
 
     public List<Company> getAllCompanies() {
-
         return companyRepository.findAll();
     }
 
@@ -33,5 +33,17 @@ public class CompanyService {
         Company company = companyMapper.mapFromRequest(request);
         companyRepository.save(company);
         return companyMapper.mapToResponse(company);
+    }
+
+    public void deleteCompany(Long id) {
+        companyRepository.deleteById(id);
+    }
+
+    public Optional<Company> updateCompany(Long id, CompanyUpdateReq request) {
+        return companyRepository.findById(id)
+                .map(c -> {
+                    c.setName(request.getName());
+                    return companyRepository.save(c);
+                });
     }
 }
