@@ -24,4 +24,5 @@ docker compose up
 ```
 
 You can test API requesting localhost:8080/api/company
+
 Example ready to run HTTP requests are in folder http/company
