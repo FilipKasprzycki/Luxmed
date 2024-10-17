@@ -1,0 +1,6 @@
+PUT localhost:8080/api/company/1
+Content-Type: application/json
+
+{
+    "name": "Lux Med"
+}

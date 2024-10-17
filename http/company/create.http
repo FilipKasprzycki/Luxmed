@@ -1,0 +1,36 @@
+POST localhost:8080/api/company
+Content-Type: application/json
+
+{
+    "name": "Luxmed",
+    "departments": [
+        {
+            "name": "IT",
+            "teams": [
+                {
+                    "name": "Team-A",
+                    "project": {
+                        "name": "Ubezpieczenia",
+                        "manager": {
+                            "name": "Jan Kowalski",
+                            "email": "jan.kowalski@luxmed.pl",
+                            "phone": "111-222-333"
+                        }
+                    }
+                },
+                {
+                    "name": "Team-B",
+                    "project": {
+                        "name": "Mobile App",
+                        "manager": {
+                            "name": "Kamil Nowak",
+                            "email": "kamil.nowak@luxmed.pl",
+                            "phone": "123-456-789",
+                            "additionalContactInformation": "Dostępny w godzinach 10:00 - 18:00"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
