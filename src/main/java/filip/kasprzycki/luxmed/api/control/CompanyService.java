@@ -18,12 +18,14 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
 
-    public List<Company> getAllCompanies() {
-        return companyRepository.findAll();
+    public List<CompanyResp> getAllCompanies() {
+        List<Company> companies = companyRepository.findAll();
+        return companyMapper.mapToResponseList(companies);
     }
 
-    public Optional<Company> getCompanyById(long id) {
-        return companyRepository.findById(id);
+    public Optional<CompanyResp> getCompanyById(long id) {
+        return companyRepository.findById(id)
+                .map(companyMapper::mapToResponse);
     }
 
     public CompanyResp createCompany(CompanyReq request) {
@@ -36,11 +38,12 @@ public class CompanyService {
         companyRepository.deleteById(id);
     }
 
-    public Optional<Company> updateCompany(long id, CompanyUpdateReq request) {
+    public Optional<CompanyResp> updateCompany(long id, CompanyUpdateReq request) {
         return companyRepository.findById(id)
                 .map(c -> {
                     c.setName(request.getName());
                     return companyRepository.save(c);
-                });
+                })
+                .map(companyMapper::mapToResponse);
     }
 }

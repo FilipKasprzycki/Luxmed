@@ -23,20 +23,20 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping
-    public List<Company> getAllCompanies() {
+    public List<CompanyResp> getAllCompanies() {
         log.info("[GET] /api/company");
 
-        List<Company> response = companyService.getAllCompanies();
+        List<CompanyResp> response = companyService.getAllCompanies();
 
         log.info("Response: {}", response);
         return response;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
+    public ResponseEntity<CompanyResp> getCompanyById(@PathVariable long id) {
         log.info("[GET] /api/company/{}", id);
 
-        Optional<Company> response = companyService.getCompanyById(id);
+        Optional<CompanyResp> response = companyService.getCompanyById(id);
 
         log.info("Response: {}", response.isPresent() ? response.get() : "not found");
         return response.map(ResponseEntity::ok)
@@ -64,10 +64,10 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updateCompany(@PathVariable long id, @RequestBody @Valid CompanyUpdateReq company) {
+    public ResponseEntity<CompanyResp> updateCompany(@PathVariable long id, @RequestBody @Valid CompanyUpdateReq company) {
         log.info("[PUT] api/company/{} with request body {}", id, company);
 
-        Optional<Company> response = companyService.updateCompany(id, company);
+        Optional<CompanyResp> response = companyService.updateCompany(id, company);
 
         log.info("Response: {}", response.isPresent() ? response.get() : "not found");
         return response.map(ResponseEntity::ok)
