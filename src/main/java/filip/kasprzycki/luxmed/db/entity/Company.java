@@ -20,5 +20,6 @@ public class Company {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Department> departments;
 }

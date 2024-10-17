@@ -6,13 +6,11 @@ import filip.kasprzycki.luxmed.api.entity.CompanyUpdateReq;
 import filip.kasprzycki.luxmed.db.entity.Company;
 import filip.kasprzycki.luxmed.db.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
@@ -29,7 +27,6 @@ public class CompanyService {
     }
 
     public CompanyResp createCompany(CompanyReq request) {
-        log.info("Creating company from request: {}", request);
         Company company = companyMapper.mapFromRequest(request);
         companyRepository.save(company);
         return companyMapper.mapToResponse(company);
