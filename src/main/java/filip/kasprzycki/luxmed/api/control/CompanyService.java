@@ -24,7 +24,7 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Optional<Company> getCompanyById(Long id) {
+    public Optional<Company> getCompanyById(long id) {
         return companyRepository.findById(id);
     }
 
@@ -35,11 +35,11 @@ public class CompanyService {
         return companyMapper.mapToResponse(company);
     }
 
-    public void deleteCompany(Long id) {
+    public void deleteCompany(long id) {
         companyRepository.deleteById(id);
     }
 
-    public Optional<Company> updateCompany(Long id, CompanyUpdateReq request) {
+    public Optional<Company> updateCompany(long id, CompanyUpdateReq request) {
         return companyRepository.findById(id)
                 .map(c -> {
                     c.setName(request.getName());

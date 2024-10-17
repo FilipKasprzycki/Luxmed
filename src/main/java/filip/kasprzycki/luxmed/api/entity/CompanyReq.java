@@ -1,5 +1,7 @@
 package filip.kasprzycki.luxmed.api.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,6 +15,9 @@ import java.util.List;
 @EqualsAndHashCode
 public class CompanyReq {
 
+    @NotBlank
+    @Size(min = 1, max = 10_000)
     private String name;
+
     private List<DepartmentReq> departments;
 }
